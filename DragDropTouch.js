@@ -153,7 +153,8 @@ var DragDropTouch;
                     tm = this._touchmove.bind(this), 
                     te = this._touchend.bind(this), 
                     opt = supportsPassive ? { passive: false, capture: false } : false;
-                d.addEventListener('touchstart', ts, opt);
+                //d.addEventListener('touchstart', ts, opt);
+                d.addEventListener('touchstart', ts);
                 d.addEventListener('touchmove', tm, opt);
                 d.addEventListener('touchend', te);
                 d.addEventListener('touchcancel', te);
@@ -189,7 +190,7 @@ var DragDropTouch;
                         this._dragSource = src;
                         this._ptDown = this._getPoint(e);
                         this._lastTouch = e;
-                        e.preventDefault();
+                        //e.preventDefault();
                         // show context menu if the user hasn't started dragging after a while
                         setTimeout(function () {
                             if (_this._dragSource == src && _this._img == null) {
