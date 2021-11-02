@@ -153,8 +153,8 @@ var DragDropTouch;
                     tm = this._touchmove.bind(this), 
                     te = this._touchend.bind(this), 
                     opt = supportsPassive ? { passive: false, capture: false } : false;
-                //d.addEventListener('touchstart', ts, opt);
-                d.addEventListener('touchstart', ts);
+                d.addEventListener('touchstart', ts, opt);
+                //d.addEventListener('touchstart', ts);
                 d.addEventListener('touchmove', tm, opt);
                 d.addEventListener('touchend', te);
                 d.addEventListener('touchcancel', te);
@@ -231,7 +231,7 @@ var DragDropTouch;
                 // continue dragging
                 if (this._img) {
                     this._lastTouch = e;
-                    e.preventDefault(); // prevent scrolling
+                    //e.preventDefault(); // prevent scrolling
                     this._dispatchEvent(e, 'drag', this._dragSource);
                     if (target != this._lastTarget) {
                         this._dispatchEvent(this._lastTouch, 'dragleave', this._lastTarget);
