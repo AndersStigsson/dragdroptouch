@@ -372,9 +372,11 @@ var DragDropTouch;
                     s.zIndex = '999999';
                     s.left = Math.round(pt.x - _this._imgOffset.x) + 'px';
                     s.top = Math.round(pt.y - _this._imgOffset.y) + 'px';
-			console.log(window.innerHeight);
-		if(window.innerHeight - s.top < 30) {
-			window.scroll(0, window.scrollY + 30)
+		    	
+		if(window.innerHeight - e.touches[0].clientY < 5) {
+			window.scroll(0, window.scrollY + 5)
+		} else if (e.touches[0].clientY < 5) {
+			window.scroll(0, window.scrollY - 5)
 		}
                 }
             });
