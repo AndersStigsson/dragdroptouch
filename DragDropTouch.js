@@ -361,6 +361,15 @@ var DragDropTouch;
             this._img = null;
             this._imgCustom = null;
         };
+        
+        DragDropTouch.prototype._getColumnTarget = function (pt) {
+            var el = document.elementFromPoint(pt.x, pt.y);
+
+            while (el && !el.classList.contains('column')) {
+                el = el.parentElement;
+            }
+            return el;
+        }
         // move the drag image element
         DragDropTouch.prototype._moveImage = function (e) {
             var _this = this;
@@ -372,12 +381,15 @@ var DragDropTouch;
                     s.zIndex = '999999';
                     s.left = Math.round(pt.x - _this._imgOffset.x) + 'px';
                     s.top = Math.round(pt.y - _this._imgOffset.y) + 'px';
+                    var element = _this._getColumnTarget(pt);
+                    var boundingClientRect = element.getBoundingClientRect();
+                    var elementY = boundingClientRect.y;
 		    	
-		if(window.innerHeight - e.touches[0].clientY < 5) {
-			window.scroll(0, window.scrollY + 5)
-		} else if (e.touches[0].clientY < 5) {
-			window.scroll(0, window.scrollY - 5)
-		}
+                    if(window.innerHeight - e.touches[0].clientY < 10) {
+                        element.scroll(0, element.scrollTop + 10)
+                    } else if (elementY + 10 > e.touches[0].clientY) {
+                        element.scroll(0, element.scrollTop - 10)
+                    }
                 }
             });
         };
